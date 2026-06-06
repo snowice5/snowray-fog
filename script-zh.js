@@ -15,8 +15,11 @@ const resetMessages = [
 
 const messageElement = document.querySelector("#reset-message");
 const buttonElement = document.querySelector("#reset-button");
+const audioElement = document.querySelector("#ambient-audio");
+const soundButtonElement = document.querySelector("#sound-button");
 
 let lastMessageIndex = -1;
+let fadeTimer;
 
 function chooseResetMessage() {
   let nextIndex = Math.floor(Math.random() * resetMessages.length);
@@ -28,7 +31,32 @@ function chooseResetMessage() {
   }
 
   lastMessageIndex = nextIndex;
-  messageElement.textContent = resetMessages[nextIndex];
+  document.body.classList.remove("fog-cleared");
+  window.setTimeout(() => {
+    document.body.classList.add("fog-cleared");
+  }, 20);
+
+  window.clearTimeout(fadeTimer);
+  messageElement.classList.add("message-fade");
+
+  fadeTimer = window.setTimeout(() => {
+    messageElement.textContent = resetMessages[nextIndex];
+    messageElement.classList.remove("message-fade");
+  }, 260);
+}
+
+async function toggleAmbientSound() {
+  if (audioElement.paused) {
+    await audioElement.play();
+    soundButtonElement.textContent = "暫停氛圍音";
+    soundButtonElement.classList.add("is-playing");
+    return;
+  }
+
+  audioElement.pause();
+  soundButtonElement.textContent = "播放氛圍音";
+  soundButtonElement.classList.remove("is-playing");
 }
 
 buttonElement.addEventListener("click", chooseResetMessage);
+soundButtonElement.addEventListener("click", toggleAmbientSound);

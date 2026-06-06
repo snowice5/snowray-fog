@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="fog-overlay" aria-hidden="true">
+      <span class="fog fog-one"></span>
+      <span class="fog fog-two"></span>
+      <span class="fog fog-three"></span>
+      <span class="soft-light"></span>
+    </div>
+
     <main class="page">
       <section class="reset-panel" aria-labelledby="page-title">
         <div class="brand-mark">
@@ -24,13 +31,21 @@
         </div>
 
         <button id="reset-button" type="button">給我一個重啟</button>
+
+        <div class="sound-control">
+          <audio id="ambient-audio" src="Snowlight Reverie.mp3" loop preload="metadata"></audio>
+          <button id="sound-button" class="sound-button" type="button">
+            播放氛圍音
+          </button>
+        </div>
+
         <a
           class="music-link"
           href="https://www.youtube.com/@SnowrayInsights"
           target="_blank"
           rel="noopener noreferrer"
         >
-          到 YouTube 聽我製作的 rest 輕音樂
+          前往 YouTube 頻道，聽 Snowray vibe music
         </a>
       </section>
     </main>

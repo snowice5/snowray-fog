@@ -41,7 +41,85 @@ body::before {
   opacity: 0.55;
 }
 
+.fog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fog,
+.soft-light {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  filter: blur(34px);
+  transform: translate3d(0, 0, 0);
+}
+
+.fog {
+  background: rgba(255, 255, 255, 0.58);
+  opacity: 0.78;
+  transition: opacity 1800ms ease, transform 2200ms ease;
+}
+
+.fog-one {
+  width: min(74vw, 760px);
+  height: 180px;
+  top: 17%;
+  left: -12%;
+}
+
+.fog-two {
+  width: min(82vw, 860px);
+  height: 230px;
+  right: -20%;
+  bottom: 21%;
+  opacity: 0.64;
+}
+
+.fog-three {
+  width: min(64vw, 620px);
+  height: 150px;
+  left: 18%;
+  bottom: 6%;
+  opacity: 0.48;
+}
+
+.soft-light {
+  width: min(52vw, 520px);
+  height: min(52vw, 520px);
+  top: 3%;
+  right: 9%;
+  background: rgba(255, 255, 255, 0.52);
+  opacity: 0.26;
+  transition: opacity 2200ms ease, transform 2400ms ease;
+}
+
+body.fog-cleared .fog-one {
+  opacity: 0.22;
+  transform: translate3d(-12%, -18px, 0) scale(1.12);
+}
+
+body.fog-cleared .fog-two {
+  opacity: 0.16;
+  transform: translate3d(13%, 24px, 0) scale(1.16);
+}
+
+body.fog-cleared .fog-three {
+  opacity: 0.12;
+  transform: translate3d(0, 32px, 0) scale(1.18);
+}
+
+body.fog-cleared .soft-light {
+  opacity: 0.42;
+  transform: translate3d(-18px, 12px, 0) scale(1.06);
+}
+
 .page {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -121,6 +199,14 @@ h1 {
   color: #2f4852;
   font-size: clamp(1.08rem, 2.8vw, 1.45rem);
   line-height: 1.55;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+
+#reset-message.message-fade {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 button {
@@ -152,6 +238,29 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
+.sound-control {
+  margin-top: 14px;
+}
+
+.sound-button {
+  min-height: 40px;
+  padding: 0 18px;
+  color: var(--cyan-deep);
+  background: rgba(255, 255, 255, 0.58);
+  border-color: rgba(18, 151, 165, 0.22);
+  box-shadow: 0 10px 26px rgba(18, 151, 165, 0.08);
+  font-size: 0.94rem;
+}
+
+.sound-button:hover {
+  box-shadow: 0 14px 30px rgba(18, 151, 165, 0.14);
+}
+
+.sound-button.is-playing {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(34, 200, 210, 0.86), rgba(18, 151, 165, 0.86));
+}
+
 .music-link {
   width: fit-content;
   max-width: 100%;
@@ -161,8 +270,10 @@ button:focus-visible {
   font-size: 0.95rem;
   font-weight: 650;
   line-height: 1.45;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(18, 151, 165, 0.28);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  border-bottom: 0;
   transition: color 160ms ease, border-color 160ms ease;
 }
 
@@ -188,5 +299,27 @@ button:focus-visible {
 
   button {
     width: 100%;
+  }
+
+  .fog {
+    filter: blur(28px);
+  }
+
+  .fog-one {
+    width: 112vw;
+    height: 150px;
+    top: 14%;
+  }
+
+  .fog-two {
+    width: 122vw;
+    height: 190px;
+    bottom: 17%;
+  }
+
+  .fog-three {
+    width: 96vw;
+    height: 130px;
+    left: 4%;
   }
 }
