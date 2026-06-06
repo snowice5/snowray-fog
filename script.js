@@ -21,6 +21,19 @@ const soundButtonElement = document.querySelector("#sound-button");
 let lastMessageIndex = -1;
 let fadeTimer;
 
+function fitMessageText(text) {
+  messageElement.classList.remove("message-long", "message-extra-long");
+
+  if (text.length > 86) {
+    messageElement.classList.add("message-extra-long");
+    return;
+  }
+
+  if (text.length > 68) {
+    messageElement.classList.add("message-long");
+  }
+}
+
 function chooseResetMessage() {
   let nextIndex = Math.floor(Math.random() * resetMessages.length);
 
@@ -41,6 +54,7 @@ function chooseResetMessage() {
 
   fadeTimer = window.setTimeout(() => {
     messageElement.textContent = resetMessages[nextIndex];
+    fitMessageText(resetMessages[nextIndex]);
     messageElement.classList.remove("message-fade");
   }, 260);
 }
@@ -48,13 +62,13 @@ function chooseResetMessage() {
 async function toggleAmbientSound() {
   if (audioElement.paused) {
     await audioElement.play();
-    soundButtonElement.textContent = "Pause ambience";
+    soundButtonElement.textContent = "Pause Snowlight";
     soundButtonElement.classList.add("is-playing");
     return;
   }
 
   audioElement.pause();
-  soundButtonElement.textContent = "Play ambience";
+  soundButtonElement.textContent = "Listen to Snowlight";
   soundButtonElement.classList.remove("is-playing");
 }
 

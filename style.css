@@ -184,13 +184,14 @@ h1 {
 }
 
 .message-area {
-  min-height: 112px;
+  height: clamp(132px, 18vw, 164px);
   display: grid;
   place-items: center;
   margin: 36px auto 26px;
-  padding: 24px;
+  padding: 24px 28px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 
 #reset-message {
@@ -207,6 +208,14 @@ h1 {
 #reset-message.message-fade {
   opacity: 0;
   transform: translateY(8px);
+}
+
+#reset-message.message-long {
+  font-size: clamp(0.98rem, 2.25vw, 1.22rem);
+}
+
+#reset-message.message-extra-long {
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
 }
 
 button {
@@ -294,7 +303,17 @@ button:focus-visible {
   }
 
   .message-area {
-    padding: 22px 10px;
+    height: 154px;
+    padding: 22px 12px;
+    margin: 30px auto 22px;
+  }
+
+  #reset-message.message-long {
+    font-size: 1rem;
+  }
+
+  #reset-message.message-extra-long {
+    font-size: 0.92rem;
   }
 
   button {
