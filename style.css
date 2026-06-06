@@ -152,10 +152,10 @@ body.fog-cleared .soft-light {
 }
 
 .brand-mark img {
-  width: 132%;
-  height: 132%;
+  width: 145%;
+  height: 145%;
   object-fit: cover;
-  object-position: center 38%;
+  object-position: center 30%;
 }
 
 .eyebrow {
